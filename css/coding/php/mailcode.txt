@@ -1,0 +1,26 @@
+require 'PHPMailer-master/PHPMailerAutoload.php';
+$email='';
+$password='';
+$to_id=$_POST['em'];
+$subject='Your Subject Here ';
+$message='Your Message Here';
+$mail=new PHPMailer;
+$mail->isSMTP();
+$mail->Host='smtp.gmail.com';
+$mail->Port=587;
+$mail->SMTPSecure='tls';
+$mail->SMTPAuth=true;
+$mail->Username=$email;
+$mail->Password=$password;
+$mail->addAddress($to_id);
+$mail->Subject=$subject;
+$mail->msgHTML($message);
+if(!$mail->send())
+{
+$error="Mailer Error:".$mail->ErrorInfo;
+echo '<p id="para">'.$error.'</p>';
+}
+else
+{
+echo "<div class='alert alert-success' style='padding:2px;'>Message has been sent</div>";
+}
